@@ -469,8 +469,8 @@ $i18n_key_words = array(
 'form.users.role' => 'Vloga',
 'form.users.manager' => 'Vodja',
 'form.users.comanager' => 'Pomočnik vodje',
-'form.users.rate' => 'Stopnja',
-'form.users.default_rate' => 'Privzeta urna stopnja',
+'form.users.rate' => 'Postavka',
+'form.users.default_rate' => 'Privzeta urna postavka',
 
 // Editing User form. See example at https://timetracker.anuko.com/user_edit.php
 'form.user_edit.swap_roles' => 'Zamenjaj vloge',

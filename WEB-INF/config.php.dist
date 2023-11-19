@@ -23,7 +23,7 @@ define('DSN', 'mysqli://root:no@localhost/dbname?charset=utf8mb4');
 //
 // Available values are true or false.
 //
-define('MULTIORG_MODE', true);
+define('MULTIORG_MODE', false);
 
 
 // EMAIL_REQUIRED defines whether an email is required for new registrations.
@@ -113,7 +113,7 @@ define('LANG_DEFAULT', '');
 
 // Default currency symbol. Use €, £, a more specific dollar like US$, CAD, etc.
 // 
-define('CURRENCY_DEFAULT', '$');
+define('CURRENCY_DEFAULT', '€');
 
 
 // EXPORT_DECIMAL_DURATION - defines whether time duration values are decimal in CSV and XML data exports (1.25 or 1,25 vs 1:15).
@@ -123,7 +123,7 @@ define('EXPORT_DECIMAL_DURATION', true);
 
 // REPORT_FOOTER - defines whether to use a footer on reports.
 // 
-define('REPORT_FOOTER', true);
+define('REPORT_FOOTER', false);
 
 
 // Authentication module (see WEB-INF/lib/auth/)

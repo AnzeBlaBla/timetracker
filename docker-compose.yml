@@ -9,9 +9,9 @@ services:
       dockerfile: dockerfile-tt
     image: anuko_timetracker:dev
     container_name: anuko-timetracker
-    # Use localhost:8080 to connect to timetracker via browser.
+    # Use localhost to connect to timetracker via browser.
     ports:
-     - "80:80"
+     - "9099:80"
 
   # anuko_db is a mariadb instance to which timetracker connects.
   # Connect parameters are also specified in timetracker dockerfile after
@@ -32,6 +32,21 @@ services:
       MYSQL_PASSWORD: anuko_pw
     volumes:
       - anuko_db:/var/lib/mysql
+    #ports:
+    #  - "3306:3306"
+
+  # phpmyadmin is a web application to manage mariadb.
+  # It is not required for timetracker to work, but is useful for
+  # development and debugging.
+  #phpmyadmin:
+  # image: phpmyadmin/phpmyadmin
+  # container_name: phpmyadmin
+  # restart: always
+  # ports:
+  #  - 8080:80
+  # environment:
+  #  PMA_HOST: anuko_db
+  #  MYSQL_ROOT_PASSWORD: anuko_pw
 
 volumes:
    anuko_db:
