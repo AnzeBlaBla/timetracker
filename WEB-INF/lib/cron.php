@@ -42,6 +42,9 @@ class CronJob
 
   public function run($action = 'start')
   {
+    echo "Running cron job for action $action\n";
+    echo "Time: " . date('Y-m-d H:i:s') . "\n";
+    
     if ($action == 'start') {
       $this->start();
     } else if ($action == 'end') {

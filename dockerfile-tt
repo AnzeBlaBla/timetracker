@@ -21,6 +21,25 @@ RUN apt-get install libldap2-dev -y \
 # TODO: check if ldap works, as the above is missing this step:
 # && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ && \
 
+# Install cron.
+RUN apt-get install cron -y
+
+# Setup cron jobs.
+
+# Make cron logs dir
+RUN mkdir -p /var/log/cron
+
+# 1. Run at 07:15 every workday.
+RUN crontab -l | { cat; echo "15 7 * * 1-5 php /var/www/html/WEB-INF/lib/cron.php >> /var/log/cron/cron.log 2>&1"; } | crontab -
+
+# 2. Run at 15:15 every workday.
+RUN crontab -l | { cat; echo "15 15 * * 1-5 php /var/www/html/WEB-INF/lib/cron.php end >> /var/log/cron/cron.log 2>&1"; } | crontab -
+
+# Test crontabs: same as above but also run on weekends.
+#RUN crontab -l | { cat; echo "20 16 * * 1-7 php /var/www/html/WEB-INF/lib/cron.php end >> /var/log/cron/cron.log 2>&1"; } | crontab -
+
+ADD docker/cron_start.sh /docker-entrypoint.d
+
 # Cleanup. The intention was to keep image size down.
 # RUN rm -rf /var/lib/apt/lists/*
 #
