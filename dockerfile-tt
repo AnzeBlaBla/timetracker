@@ -30,10 +30,10 @@ RUN apt-get install cron -y
 RUN mkdir -p /var/log/cron
 
 # 1. Run at 07:15 every workday.
-RUN crontab -l | { cat; echo "15 7 * * 1-5 php /var/www/html/WEB-INF/lib/cron.php >> /var/log/cron/cron.log 2>&1"; } | crontab -
+RUN crontab -l | { cat; echo "15 6 * * 1-5 php /var/www/html/WEB-INF/lib/cron.php >> /var/log/cron/cron.log 2>&1"; } | crontab -
 
 # 2. Run at 15:15 every workday.
-RUN crontab -l | { cat; echo "15 15 * * 1-5 php /var/www/html/WEB-INF/lib/cron.php end >> /var/log/cron/cron.log 2>&1"; } | crontab -
+RUN crontab -l | { cat; echo "15 14 * * 1-5 php /var/www/html/WEB-INF/lib/cron.php end >> /var/log/cron/cron.log 2>&1"; } | crontab -
 
 # Test crontabs: same as above but also run on weekends.
 #RUN crontab -l | { cat; echo "20 16 * * 1-7 php /var/www/html/WEB-INF/lib/cron.php end >> /var/log/cron/cron.log 2>&1"; } | crontab -
