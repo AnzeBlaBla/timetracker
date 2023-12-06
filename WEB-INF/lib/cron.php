@@ -25,6 +25,14 @@ class CronJob
   private $end_time_from = '14:53:00';
   private $end_time_to = '15:05:00';
 
+  // Maps user id to new end times
+  private $special_end_times = [
+    "15" => [
+      "from" => "08:53:00",
+      "to" => "09:05:00"
+    ]
+    ];
+
   private $break_start_time = '10:00';
   private $break_end_time = '10:30';
   private $break_msg = 'Malica od %s do %s';
@@ -132,8 +140,16 @@ INSERT INTO `tt_log`(`id`, `user_id`, `group_id`, `org_id`, `date`, `start`, `du
 
       $start_time = $row['start'];
 
+      $use_end_time_from = $this->end_time_from;
+      $use_end_time_to = $this->end_time_to;
+
+      if (array_key_exists($user_id, $this->special_end_times)) {
+        $use_end_time_from = $this->special_end_times[$user_id]['from'];
+        $use_end_time_to = $this->special_end_times[$user_id]['to'];
+      }
+
       // Get end time
-      $end_time = $this->getRandomTime($this->end_time_from, $this->end_time_to);
+      $end_time = $this->getRandomTime($use_end_time_from, $use_end_time_to);
 
       // Get modified time
       $modified = $this->applyRandomOffset($end_time, $this->entry_time_variation_after_event_seconds, 'after');
